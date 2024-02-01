@@ -1,14 +1,13 @@
-/* '   123456  ' -> так
-' -0123456  ' -> так
-'     -12345  ' -> ні
-'   -023456' -> ні
- '-0234560' -> так,
-' -000016   ' -> ні
-' -000000123456  ' -> так
-' - 000000123456  ' -> ні
-' +000123456  ' -> так
-'100000' -> так  
- '1000000' -> ні*/
+/* '   123456  ' -> true
+' -0123456  ' -> true
+'     -12345  ' -> false
+'   -023456' -> false
+ '-0234560' -> true,
+' -000016   ' -> false
+' -000000123456  ' -> true
+' - 000000123456  ' -> false
+' +000123456  ' -> true 
+ '100000' -> true*/
 
 const sixDigitsArr = [
   '   123456  ',
@@ -21,13 +20,12 @@ const sixDigitsArr = [
   ' - 000000123456  ',
   ' +000123456  ',
   '100000',
-  '1000000'
 ];
 
-const sixDigitsRegEx = /^[+-]?0*[1-9]\d{5}$/;
+const sixDigitsRegEx = /^\s*[+-]?0*[1-9]\d{5}\s*$/;
 
-const sixDigits = sixDigitsArr.map((element) => `${element.trim()} -> ${sixDigitsRegEx.test(element.trim()) ? 'так' : 'ні'} `);
+const sixDigits = sixDigitsArr.map(
+  (element) => `${element.trim()} -> ${sixDigitsRegEx.test(element)}`
+);
 
 console.log(sixDigits);
-
-
